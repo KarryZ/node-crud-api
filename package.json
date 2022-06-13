@@ -1,0 +1,23 @@
+{
+  "name": "crud-api",
+  "version": "1.0.0",
+  "description": "simple CRUD API with in-memory database underneath",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KarryZ/node-crud-api.git"
+  },
+  "keywords": [
+    "nodejs",
+    "crud-api"
+  ],
+  "author": "KarryZ",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KarryZ/node-crud-api/issues"
+  },
+  "homepage": "https://github.com/KarryZ/node-crud-api#readme"
+}
