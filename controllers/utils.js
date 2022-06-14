@@ -21,6 +21,21 @@ export const getPostData = (req) => {
 export const isUUIDValid = (userId) => {
     return new Promise((resolve, reject) => {
         const isValid = uuidValidate(userId) && uuidVersion(userId) === 4;
-        isValid ? resolve(true) : reject('err');
+        isValid ? resolve(true) : resolve(false);
     })
+}
+
+export const setError500 = (res) => {
+    res.writeHead(500, {'Content-Type': 'application/json'})
+    res.end(JSON.stringify({message: 'Ups! Something went wrong :('}))
+}
+
+export const setError400 = (res) => {
+    res.writeHead(400, {'Content-Type': 'application/json'})
+    res.end(JSON.stringify({message: 'Route is not found'}))
+}
+
+export const setError404 = (res) => {
+    res.writeHead(404, {'Content-Type': 'application/json'})
+    res.end(JSON.stringify({message: "User doesn't exist"}))
 }

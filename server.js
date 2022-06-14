@@ -1,5 +1,6 @@
 import { createServer } from 'http';
 import { getUsers, getUser, createUser, updateUser, deleteUser } from './controllers/userController.js';
+import { setError400 } from './controllers/utils.js';
 
 
 const server = createServer((req, res) => {   
@@ -15,11 +16,9 @@ const server = createServer((req, res) => {
         updateUser(req, res, userId)
     } else if (req.url.includes('/api/users/') && userId.length > 0  && req.method === 'DELETE') {
         deleteUser(req, res, userId)
-    }else {
-        res.writeHead(404, {'Content-Type': 'application/json'})
-        res.end(JSON.stringify({message: 'Route is not found'}))
-    }
-    
+    } else {
+        setError400(res)
+    }   
     
 });
 
