@@ -10,3 +10,12 @@ Open a new terminal and use next commands:
  - npm run start:prod - for production mode
 
 Open http://localhost:5000 in postman/Yet Another REST Client or another tool for testing server
+
+
+Example for post request:
+POST http://localhost:5000/api/users
+{
+"name": "Andy",
+"age": 29,
+"hobbies": ["swim", "hiking"]
+}
