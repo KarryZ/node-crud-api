@@ -1,6 +1,6 @@
 import { validate as uuidValidate, version as uuidVersion } from 'uuid';
 
-export const getPostData = (req) => {
+export const getPostData = (req: any) => {
     return new Promise((resolve, reject) => {
         try{
             let body = '';

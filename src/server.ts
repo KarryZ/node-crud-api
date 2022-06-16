@@ -1,9 +1,9 @@
 import { createServer } from 'http';
-import { getUsers, getUser, createUser, updateUser, deleteUser } from './controllers/userController.js';
-import { setError400 } from './controllers/utils.js';
+import { getUsers, getUser, createUser, updateUser, deleteUser } from './controllers/userController';
+import { setError400 } from './controllers/utils';
+import 'dotenv/config';
 
-
-const server = createServer((req, res) => {   
+const server = createServer((req: any, res: any) => {   
     const userId = req.url.split('/api/users/').pop();
 
     if(req.url === '/api/users' && req.method === 'GET') {

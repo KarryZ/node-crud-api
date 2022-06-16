@@ -1,8 +1,13 @@
 import { v4 as uuidv4 } from 'uuid';
 
-let users = [];
+let users: { id: string, name: string, age:number, hobbies:string[] }[] = [];
 
 export const CreateUser = class {
+    name!: string
+    age!: number
+    hobbies!: string[]
+    id!: string
+
     constructor(name, age, hobbies) {
         this.name= name;
         this.age= age;
@@ -25,17 +30,17 @@ export const findAllUsers = async () => {
     });
 }
 
-export const findUserByID = async (userId) => {
+export const findUserByID = async (userId: string) => {
     return new Promise((resolve, reject) => {
         const user = users.find(user => user.id === userId);
         resolve(user);
     })
 }
 
-export const addNewUser = ( name, age, hobby) => {
+export const addNewUser = ( name: string, age: number, hobby: string[]) => {
     return new Promise((resolve, reject) => {
         
-        if(name || age && hobby) {
+        if(name && age && hobby) {
             const user = new CreateUser(name, age, hobby);
             users.push(user);
             resolve(user);
@@ -47,16 +52,16 @@ export const addNewUser = ( name, age, hobby) => {
     
 }
 
-export const updateUserData = (id, name, age, hobby) => {
+export const updateUserData = (id: string, name: string, age: number, hobbies: any ) => {
     return new Promise((resolve, reject) => {
         const index = users.findIndex(i=> i.id === id); 
-        users[index] = {id, name, age, hobby};
+        users[index] = {id, name, age, hobbies };
         resolve(users[index]);
     });
     
 }
 
-export const removeUser = (id) => {
+export const removeUser = (id: string) => {
     return new Promise((resolve, reject) => {
         const index = users.findIndex(i=> i.id === id); 
         console.log('index', index);
@@ -65,7 +70,7 @@ export const removeUser = (id) => {
             ...users.slice(index +1)
         ];
         console.log('users', users);
-        resolve();
+        resolve(true);
     });
     
 }

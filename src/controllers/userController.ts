@@ -1,9 +1,9 @@
-import {  addAllUsers, findAllUsers, findUserByID, addNewUser, updateUserData, removeUser } from "../models/userModel.js"
-import { getPostData, isUUIDValid, setError500, setError400, setError404 } from './utils.js';
+import {  addAllUsers, findAllUsers, findUserByID, addNewUser, updateUserData, removeUser } from "../models/userModel"
+import { getPostData, isUUIDValid, setError500, setError400, setError404 } from './utils';
 
 //addAllUsers();
 
-export const getUsers = async (req, res) => {
+export const getUsers = async (req: any, res: any) => {
     try {        
         const users = await findAllUsers();
         res.writeHead(200, {'Content-Type': 'application/json'})
@@ -13,7 +13,7 @@ export const getUsers = async (req, res) => {
     }
 }
 
-export const getUser = async (req, res, userId) => {
+export const getUser = async (req: any, res: any, userId) => {
     try {
         const isUUidValid = await isUUIDValid(userId);
         const user = await findUserByID(userId);
@@ -33,9 +33,9 @@ export const getUser = async (req, res, userId) => {
 }
 
 
-export const createUser = async (req, res) => {
+export const createUser = async (req: any, res: any) => {
     try {
-        const body = await getPostData(req);        
+        const body: any = await getPostData(req);        
         const { name, age, hobbies } = JSON.parse(body);
         
         if ( !(name && age && hobbies) ){
@@ -51,18 +51,17 @@ export const createUser = async (req, res) => {
     }
 }
 
-export const updateUser =  async (req, res, userID) => {
+export const updateUser =  async (req: any, res: any, userID: string) => {
     try {
         const isUUidValid = await isUUIDValid(userID);
-        const user = await findUserByID(userID);
-        console.log('isUUidValid', isUUidValid);
-        console.log('user', user);
+        const user: { name?: string, age?: number, id?:string, hobbies?:string[] } = await findUserByID(userID);
+        
         if ( !user && isUUidValid) {
             setError404(res);
         } else if ( !user && !isUUidValid) {
             setError400(res);
         } else {
-            const body = await getPostData(req);
+            const body: any = await getPostData(req);
             const { name=user.name, age=user.age, hobbies=user.hobbies } = JSON.parse(body);
 
             const updUser = await updateUserData(userID, name, age, hobbies);
@@ -76,7 +75,7 @@ export const updateUser =  async (req, res, userID) => {
     }
 }
 
-export const deleteUser = async (req, res, userId) => {
+export const deleteUser = async (req: any, res: any, userId: string) => {
     try {
         const isUUidValid = await isUUIDValid(userId);
         const user = await findUserByID(userId);
